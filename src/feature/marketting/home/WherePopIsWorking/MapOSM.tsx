@@ -1,6 +1,7 @@
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import { WherePopIsWorkingPath } from '@/constants/imagePath'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
+import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
 
 const pinIcon = new L.Icon({
   iconUrl:
@@ -16,8 +17,8 @@ const pinIcon = new L.Icon({
 export default function MapOSM() {
   return (
     <MapContainer
-      center={[22.335, 91.832]}
-      zoom={8}
+      center={[23.8103, 90.4125]} //data center point dhaka lat long
+      zoom={7}
       scrollWheelZoom={false}
       className="h-full w-full rounded-[18px]"
     >
@@ -28,27 +29,31 @@ export default function MapOSM() {
 
       {/* Marker: Chattogram */}
       <Marker position={[22.3569, 91.7832]} icon={pinIcon}>
-        <Popup>Chattogram</Popup>
+        <Popup>
+          Chattogram
+          <img src={WherePopIsWorkingPath.image1} alt="" />
+        </Popup>
       </Marker>
 
       {/* Marker: Khagrachari */}
       <Marker position={[23.1197, 91.9341]} icon={pinIcon}>
-        <Popup>Khagrachari</Popup>
+        <Popup>
+          Khagrachari <img src={WherePopIsWorkingPath.image2} alt="" />
+        </Popup>
       </Marker>
 
       {/* Marker: Rangamati */}
       <Marker position={[22.7324, 92.2985]} icon={pinIcon}>
-        <Popup>Rangamati</Popup>
+        <Popup>
+          Rangamati <img src={WherePopIsWorkingPath.image3} alt="" />
+        </Popup>
       </Marker>
 
       {/* Marker: Bandarban */}
       <Marker position={[21.8311, 92.3686]} icon={pinIcon}>
-        <Popup>Bandarban</Popup>
-      </Marker>
-
-      {/* Marker: Cox's Bazar */}
-      <Marker position={[21.4272, 92.0058]} icon={pinIcon}>
-        <Popup>Cox's Bazar</Popup>
+        <Popup>
+          Bandarban <img src={WherePopIsWorkingPath.image4} alt="" />
+        </Popup>
       </Marker>
     </MapContainer>
   )

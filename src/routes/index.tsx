@@ -1,5 +1,5 @@
 import Footer from '@/components/web/Footer'
-import Hero from '@/feature/marketting/home/Hero'
+import Hero from '@/feature/marketting/home/hero/Hero'
 import HowWaterComesFromAir from '@/feature/marketting/home/HowWaterComesFromAir'
 import JoinHarvestSection from '@/feature/marketting/home/JoinHarvestSection'
 import LiveImpactSoFar from '@/feature/marketting/home/LiveImpactSoFar'

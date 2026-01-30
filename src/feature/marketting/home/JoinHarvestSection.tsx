@@ -125,9 +125,9 @@ export default function JoinHarvestSection() {
               {/* Bottom image */}
               <div className="mt-6 overflow-hidden rounded-[20px] border border-white/10 bg-white/5">
                 <img
-                  src="https://images.unsplash.com/photo-1554224154-26032ffc0d07?auto=format&fit=crop&w=1400&q=80"
+                  src={JoinHarvestPath.image2}
                   alt="Sponsorship"
-                  className="h-[320px] w-full object-cover"
+                  className=" w-full object-cover"
                   loading="lazy"
                 />
               </div>

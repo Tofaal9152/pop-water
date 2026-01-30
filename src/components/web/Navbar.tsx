@@ -1,7 +1,7 @@
 'use client'
 
-import React, { useState } from 'react'
 import { Menu, X } from 'lucide-react'
+import { useEffect, useState } from 'react'
 
 const NAV = [
   { label: 'Home', href: '#home' },
@@ -14,9 +14,27 @@ const NAV = [
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    // 100vh scroll
+    const onScroll = () => {
+      setScrolled(window.scrollY > 1024) // 40px por blur start
+    }
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50  bg-transparent  border-b-[1.5px]  border-[#ffffff80] ">
+    <header
+      className={[
+        'fixed inset-x-0 top-0 z-50 border-b-[1.5px] transition-all duration-300',
+        scrolled
+          ? 'bg-black/20 backdrop-blur-xl border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.35)]'
+          : 'bg-transparent border-[#ffffff80]',
+      ].join(' ')}
+    >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Brand */}
