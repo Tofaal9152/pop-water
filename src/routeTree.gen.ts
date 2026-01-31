@@ -9,50 +9,232 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProtectedRouteRouteImport } from './routes/_protected/route'
+import { Route as MarkettingRouteRouteImport } from './routes/_marketting/route'
+import { Route as AuthRouteRouteImport } from './routes/_auth/route'
+import { Route as MarkettingIndexRouteImport } from './routes/_marketting/index'
+import { Route as ProtectedDashboardRouteRouteImport } from './routes/_protected/dashboard/route'
+import { Route as AuthSigninIndexRouteImport } from './routes/_auth/signin/index'
+import { Route as ProtectedDashboardAdminTowerManagementIndexRouteImport } from './routes/_protected/dashboard/admin/tower-management/index'
+import { Route as ProtectedDashboardAdminAllTowersIndexRouteImport } from './routes/_protected/dashboard/admin/all-towers/index'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const ProtectedRouteRoute = ProtectedRouteRouteImport.update({
+  id: '/_protected',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MarkettingRouteRoute = MarkettingRouteRouteImport.update({
+  id: '/_marketting',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRouteRoute = AuthRouteRouteImport.update({
+  id: '/_auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MarkettingIndexRoute = MarkettingIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => MarkettingRouteRoute,
+} as any)
+const ProtectedDashboardRouteRoute = ProtectedDashboardRouteRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => ProtectedRouteRoute,
+} as any)
+const AuthSigninIndexRoute = AuthSigninIndexRouteImport.update({
+  id: '/signin/',
+  path: '/signin/',
+  getParentRoute: () => AuthRouteRoute,
+} as any)
+const ProtectedDashboardAdminTowerManagementIndexRoute =
+  ProtectedDashboardAdminTowerManagementIndexRouteImport.update({
+    id: '/admin/tower-management/',
+    path: '/admin/tower-management/',
+    getParentRoute: () => ProtectedDashboardRouteRoute,
+  } as any)
+const ProtectedDashboardAdminAllTowersIndexRoute =
+  ProtectedDashboardAdminAllTowersIndexRouteImport.update({
+    id: '/admin/all-towers/',
+    path: '/admin/all-towers/',
+    getParentRoute: () => ProtectedDashboardRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/': typeof MarkettingIndexRoute
+  '/dashboard': typeof ProtectedDashboardRouteRouteWithChildren
+  '/signin/': typeof AuthSigninIndexRoute
+  '/dashboard/admin/all-towers/': typeof ProtectedDashboardAdminAllTowersIndexRoute
+  '/dashboard/admin/tower-management/': typeof ProtectedDashboardAdminTowerManagementIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
+  '/': typeof MarkettingIndexRoute
+  '/dashboard': typeof ProtectedDashboardRouteRouteWithChildren
+  '/signin': typeof AuthSigninIndexRoute
+  '/dashboard/admin/all-towers': typeof ProtectedDashboardAdminAllTowersIndexRoute
+  '/dashboard/admin/tower-management': typeof ProtectedDashboardAdminTowerManagementIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
+  '/_auth': typeof AuthRouteRouteWithChildren
+  '/_marketting': typeof MarkettingRouteRouteWithChildren
+  '/_protected': typeof ProtectedRouteRouteWithChildren
+  '/_protected/dashboard': typeof ProtectedDashboardRouteRouteWithChildren
+  '/_marketting/': typeof MarkettingIndexRoute
+  '/_auth/signin/': typeof AuthSigninIndexRoute
+  '/_protected/dashboard/admin/all-towers/': typeof ProtectedDashboardAdminAllTowersIndexRoute
+  '/_protected/dashboard/admin/tower-management/': typeof ProtectedDashboardAdminTowerManagementIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/dashboard'
+    | '/signin/'
+    | '/dashboard/admin/all-towers/'
+    | '/dashboard/admin/tower-management/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/dashboard'
+    | '/signin'
+    | '/dashboard/admin/all-towers'
+    | '/dashboard/admin/tower-management'
+  id:
+    | '__root__'
+    | '/_auth'
+    | '/_marketting'
+    | '/_protected'
+    | '/_protected/dashboard'
+    | '/_marketting/'
+    | '/_auth/signin/'
+    | '/_protected/dashboard/admin/all-towers/'
+    | '/_protected/dashboard/admin/tower-management/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
+  AuthRouteRoute: typeof AuthRouteRouteWithChildren
+  MarkettingRouteRoute: typeof MarkettingRouteRouteWithChildren
+  ProtectedRouteRoute: typeof ProtectedRouteRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
+    '/_protected': {
+      id: '/_protected'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof ProtectedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_marketting': {
+      id: '/_marketting'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof MarkettingRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_auth': {
+      id: '/_auth'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_marketting/': {
+      id: '/_marketting/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof MarkettingIndexRouteImport
+      parentRoute: typeof MarkettingRouteRoute
+    }
+    '/_protected/dashboard': {
+      id: '/_protected/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof ProtectedDashboardRouteRouteImport
+      parentRoute: typeof ProtectedRouteRoute
+    }
+    '/_auth/signin/': {
+      id: '/_auth/signin/'
+      path: '/signin'
+      fullPath: '/signin/'
+      preLoaderRoute: typeof AuthSigninIndexRouteImport
+      parentRoute: typeof AuthRouteRoute
+    }
+    '/_protected/dashboard/admin/tower-management/': {
+      id: '/_protected/dashboard/admin/tower-management/'
+      path: '/admin/tower-management'
+      fullPath: '/dashboard/admin/tower-management/'
+      preLoaderRoute: typeof ProtectedDashboardAdminTowerManagementIndexRouteImport
+      parentRoute: typeof ProtectedDashboardRouteRoute
+    }
+    '/_protected/dashboard/admin/all-towers/': {
+      id: '/_protected/dashboard/admin/all-towers/'
+      path: '/admin/all-towers'
+      fullPath: '/dashboard/admin/all-towers/'
+      preLoaderRoute: typeof ProtectedDashboardAdminAllTowersIndexRouteImport
+      parentRoute: typeof ProtectedDashboardRouteRoute
     }
   }
 }
 
+interface AuthRouteRouteChildren {
+  AuthSigninIndexRoute: typeof AuthSigninIndexRoute
+}
+
+const AuthRouteRouteChildren: AuthRouteRouteChildren = {
+  AuthSigninIndexRoute: AuthSigninIndexRoute,
+}
+
+const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(
+  AuthRouteRouteChildren,
+)
+
+interface MarkettingRouteRouteChildren {
+  MarkettingIndexRoute: typeof MarkettingIndexRoute
+}
+
+const MarkettingRouteRouteChildren: MarkettingRouteRouteChildren = {
+  MarkettingIndexRoute: MarkettingIndexRoute,
+}
+
+const MarkettingRouteRouteWithChildren = MarkettingRouteRoute._addFileChildren(
+  MarkettingRouteRouteChildren,
+)
+
+interface ProtectedDashboardRouteRouteChildren {
+  ProtectedDashboardAdminAllTowersIndexRoute: typeof ProtectedDashboardAdminAllTowersIndexRoute
+  ProtectedDashboardAdminTowerManagementIndexRoute: typeof ProtectedDashboardAdminTowerManagementIndexRoute
+}
+
+const ProtectedDashboardRouteRouteChildren: ProtectedDashboardRouteRouteChildren =
+  {
+    ProtectedDashboardAdminAllTowersIndexRoute:
+      ProtectedDashboardAdminAllTowersIndexRoute,
+    ProtectedDashboardAdminTowerManagementIndexRoute:
+      ProtectedDashboardAdminTowerManagementIndexRoute,
+  }
+
+const ProtectedDashboardRouteRouteWithChildren =
+  ProtectedDashboardRouteRoute._addFileChildren(
+    ProtectedDashboardRouteRouteChildren,
+  )
+
+interface ProtectedRouteRouteChildren {
+  ProtectedDashboardRouteRoute: typeof ProtectedDashboardRouteRouteWithChildren
+}
+
+const ProtectedRouteRouteChildren: ProtectedRouteRouteChildren = {
+  ProtectedDashboardRouteRoute: ProtectedDashboardRouteRouteWithChildren,
+}
+
+const ProtectedRouteRouteWithChildren = ProtectedRouteRoute._addFileChildren(
+  ProtectedRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+  AuthRouteRoute: AuthRouteRouteWithChildren,
+  MarkettingRouteRoute: MarkettingRouteRouteWithChildren,
+  ProtectedRouteRoute: ProtectedRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

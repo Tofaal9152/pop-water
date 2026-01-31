@@ -1,4 +1,3 @@
-'use client'
 
 import { WhatWaterMakesPossiblePath } from '@/constants/imagePath'
 import { Target } from 'lucide-react'

@@ -1,8 +1,13 @@
-import { TanStackDevtools } from '@tanstack/react-devtools'
+// import { TanStackDevtools } from '@tanstack/react-devtools'
 import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
-import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
+// import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 
+import { Toaster } from '@/components/ui/sonner'
 import appCss from '../styles.css?url'
+// import { getAuthFn } from '@/feature/auth/services/auth.functions'
+import NotFound from '@/components/web/NotFound'
+import { TanstackQueryProvider } from '@/providers/query-provider'
+// import { ThemeProvider } from '@/lib/theme-provider'
 
 export const Route = createRootRoute({
   head: () => ({
@@ -25,6 +30,11 @@ export const Route = createRootRoute({
       },
     ],
   }),
+  notFoundComponent: () => <NotFound />,
+  // beforeLoad: async () => {
+  //   const auth = await getAuthFn()
+  //   return { user: auth.user, role: auth.role, isAuthed: auth.isAuthed }
+  // },
 
   shellComponent: RootDocument,
 })
@@ -36,8 +46,13 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        {children}
-        <TanStackDevtools
+        <TanstackQueryProvider>
+          {/* <ThemeProvider> */}
+          <main>{children}</main>
+          <Toaster position="top-right" />
+          {/* </ThemeProvider> */}
+        </TanstackQueryProvider>
+        {/* <TanStackDevtools
           config={{
             position: 'bottom-right',
           }}
@@ -47,7 +62,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
               render: <TanStackRouterDevtoolsPanel />,
             },
           ]}
-        />
+        /> */}
         <Scripts />
       </body>
     </html>

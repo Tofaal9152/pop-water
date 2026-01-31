@@ -1,0 +1,1 @@
+export const TOWER_QUERY_KEY = 'admin-towers'

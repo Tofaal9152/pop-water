@@ -1,5 +1,4 @@
-'use client'
-
+import { imagePath } from '@/constants/imagePath'
 import { Menu, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
@@ -17,9 +16,8 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
-    // 100vh scroll
     const onScroll = () => {
-      setScrolled(window.scrollY > 1024) // 40px por blur start
+      setScrolled(window.scrollY > 40) // 40px por blur start
     }
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
@@ -38,23 +36,13 @@ export default function Navbar() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Brand */}
-          <a href="#home" className="flex items-center gap-2 text-white">
-            <span className="grid h-8 w-8 place-items-center rounded-xl bg-white/10 ring-1 ring-white/10">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M7.5 18.5h9.4c2.2 0 4.1-1.7 4.1-3.9 0-2-1.5-3.6-3.4-3.9-.4-3-2.9-5.3-6-5.3-2.6 0-4.8 1.6-5.7 3.9-2.1.2-3.9 2-3.9 4.2 0 2.4 2 4 4.5 4z"
-                  stroke="rgba(255,255,255,0.9)"
-                  strokeWidth="1.6"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </span>
+          <div className="flex items-center gap-2">
+            <img src={imagePath.logo} alt="PoP Water Tower Logo" className='w-6 h-6' />
 
             <span className="text-sm font-semibold tracking-wide">
               PoP Water Tower
             </span>
-          </a>
+          </div>
 
           {/* Desktop links */}
           <nav className="hidden items-center gap-8 md:flex">

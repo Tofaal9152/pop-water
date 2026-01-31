@@ -8,7 +8,7 @@ export default function JoinHarvestSection() {
         {/* Header */}
         <div className="max-w-2xl">
           <div className="h-8 w-30 rounded-full bg-white/10 flex items-center justify-center px-4 text-sm font-semibold">
-            Get Involved
+            The Location
           </div>
           <h2 className="mt-6 text-4xl font-extrabold tracking-tight">
             Join the Harvest
